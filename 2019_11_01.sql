@@ -166,6 +166,9 @@ SELECT CONCAT(CONCAT('HELLO',', '),'WORLD') CONCAT,
         RPAD('HELLO, WORLD', 15) rpad
 FROM dual;
 
+dd
+
+
 
 
 

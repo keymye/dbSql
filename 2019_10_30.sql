@@ -84,7 +84,6 @@ SELECT *
 FROM users
 WHERE usernm = '»ø¸®';
 
-µÇ¶ó
 
 
 

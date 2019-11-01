@@ -166,14 +166,5 @@ SELECT *
 FROM emp
 WHERE job = 'SALESMAN' OR empno LIKE '78%';
 
---실습13(LIKE사용X)
-SELECT *
-FROM emp
-WHERE job = 'SALESMAN' OR empno =78 OR (empno BETWEEN 780 AND 789) OR  (empno BETWEEN 7800 AND 7899);
 
---실습14
-SELECT *
-FROM emp
-WHERE (job = 'SALESMAN' AND hiredate >= TO_DATE('1981/06/01','YYYY/MM/DD') )
-OR (empno LIKE ('78%') AND hiredate >= TO_DATE('1981/06/01','YYYY/MM/DD'));
 
