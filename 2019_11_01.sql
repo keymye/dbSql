@@ -148,10 +148,11 @@ WHERE LOWER(ename) = 'smith';
 --LENGTH : 문자열의 길이
 --INSTR : 문자열에 특정 문자열이 등장하는 첫번째 인덱스
 --SELECT CONCAT('HELLO',', WORLD') CONCAT
---LPAD : 문자열에 특정 문자열을  삽입ㅂ
+--LPAD : 문자열에 특정 문자열을  삽입
 SELECT CONCAT(CONCAT('HELLO',', '),'WORLD') CONCAT,
         SUBSTR('HELLO, WORLD', 0, 5) substr,
         SUBSTR('HELLO, WORLD', 1, 5) substr1, 
+
         --둘 결과 같음
         LENGTH('HELLO, WORLD') length,
         INSTR('HELLO, WORLD', 'O') instr1,
