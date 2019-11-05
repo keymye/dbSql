@@ -150,7 +150,7 @@ FROM dual;
 SELECT ename,TO_CHAR(hiredate,'YYYY/MM/DD HH24:MI:SS') as hiredate,
 TO_CHAR(ROUND(hiredate,'YYYY'),'YYYY/MM/DD HH24:MI:SS') as round_yyyy,--월에서 반올림
 TO_CHAR(ROUND(hiredate,'MM'),'YYYY/MM/DD HH24:MI:SS') as round_mm,
-TO_CHAR(ROUND(hiredate-1,'MM'),'YYYY/MM/DD HH24:MI:SS') as round_mm,
+TO_CHAR(ROUND(hiredate-1,'MM'),'YYYY/MM/DD HH24:MI:SS') as round_mm,--16일부터 반올림됨
 TO_CHAR(ROUND(hiredate-2,'MM'),'YYYY/MM/DD HH24:MI:SS') as round_mm,--일에서 반올림
 TO_CHAR(ROUND(hiredate,'DD'),'YYYY/MM/DD HH24:MI:SS') as round_dd --시간에서반올림
 FROM emp
