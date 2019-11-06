@@ -162,20 +162,42 @@ FROM emp
 GROUP BY DEPTNO;
 
 --grp3
-SELECT DECODE(deptno,10,'ACCOUNTING',20,'RESEARCH',30,'SALES',40,'OPERATIONS','DDIT') dname,
-MAX(sal) max_sal, MIN(sal) min_sal, ROUND(AVG(sal),2) avg_sal, SUM(sal) sum_sal, COUNT(sal) count_sal,
+SELECT DECODE(deptno,10,'ACCOUNTING',
+                    20,'RESEARCH',
+                    30,'SALES',
+                    40,'OPERATIONS'
+                    ,'DDIT') dname,
+MAX(sal) max_sal, MIN(sal) min_sal, ROUND(AVG(sal),2) avg_sal, 
+SUM(sal) sum_sal, COUNT(sal) count_sal,
 COUNT(mgr) count_mgr, 
 COUNT(*) count_all
 FROM emp
-GROUP BY DEPTNO
-ORDER BY DNAME;
+GROUP BY deptno
+ORDER BY dname;
+
+
+SELECT DECODE(deptno,10,'ACCOUNTING',
+                    20,'RESEARCH',
+                    30,'SALES',
+                    40,'OPERATIONS'
+                    ,'DDIT') dname,
+MAX(sal) max_sal, MIN(sal) min_sal, ROUND(AVG(sal),2) avg_sal, 
+SUM(sal) sum_sal, COUNT(sal) count_sal,
+COUNT(mgr) count_mgr, 
+COUNT(*) count_all
+FROM emp
+GROUP BY DECODE(deptno,10,'ACCOUNTING',
+                    20,'RESEARCH',
+                    30,'SALES',
+                    40,'OPERATIONS'
+                    ,'DDIT')
+ORDER BY dname;
  
 --grp4
 SELECT TO_CHAR(hiredate,'YYYYMM') hire_yyyymm , COUNT(*) cnt
 FROM emp
 GROUP BY TO_CHAR(hiredate,'YYYYMM');
 
-SELECT * FROM emp;
 
 
 
