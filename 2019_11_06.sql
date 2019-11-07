@@ -14,9 +14,6 @@ SELECT deptno, MAX(sal) max_sal
 FROM emp
 GROUP BY deptno;
 
-SELECT *
-FROM dept;
-
 --grp5
 SELECT TO_CHAR(hiredate,'YYYY') hire_yyyy, COUNT(*) cnt
 FROM emp
@@ -41,6 +38,7 @@ UPDATE emp SET dname ='ACCOUNTING' WHERE DEPTNO = 10;
 UPDATE emp SET dname ='RESEARCH' WHERE DEPTNO = 20;
 UPDATE emp SET dname ='SALES' WHERE DEPTNO = 30;
 COMMIT;
+
 
 SELECT dname, MAX(sal) max_sal
 FROM emp
@@ -75,7 +73,11 @@ SELECT emp.empno, emp.ename, dept.dname
 FROM emp, dept
 WHERE emp.deptno = dept.deptno
 AND emp.job='SALESMAN';
---job이 SALES인 사람만 대상으로 조회
+
+SELECT emp.empno,  emp.ename, dept.dname
+FROM emp JOIN dept ON(emp.deptno = dept.deptno
+AND emp.job='SALESMAN');
+--job이 SALESMAN인 사람만 대상으로 조회
 
 --JOIN with ON(개발자가 조인 컬럼을 ON절에 직접 기술)
 SELECT emp.empno, emp.ename, dept.dname
@@ -115,19 +117,28 @@ WHERE a.mgr = b.empno
 --WHERE a.mgr != b.empno
 AND a.empno = 7369;
 
+SELECT a.empno, a.ename, a.mgr, b.empno, b.ename
+FROM emp a JOIN emp b ON(a.mgr = b.empno AND a.empno = 7369);
+
+SELECT a.empno, a.ename, a.mgr, b.empno, b.ename
+FROM emp a JOIN emp b ON(a.mgr = b.empno)
+WHERE a.empno = 7369;
+
 
 SELECT a.empno, a.ename, a.mgr, b.empno, b.ename
 FROM emp a , emp b
-WHERE a.empno = 7369;
+WHERE a.empno = 7369; 
+--모든 경우의 수가 나온다.
+
 
 --JOIN0
 SELECT empno, ename, deptno, dname
 FROM emp natural join dept
 ORDER BY dname;
 
-SELECT emp.empno, emp.ename, deptno, dept.dname
+SELECT emp.empno, emp.ename, emp.deptno, dept.dname
 FROM emp JOIN dept USING(deptno)
-ORDER BY dname;
+ORDER BY deptno;
 
 SELECT emp.empno, emp.ename, emp.deptno, dept.dname
 FROM emp JOIN dept ON(emp.deptno=dept.deptno)
@@ -142,11 +153,22 @@ WHERE deptno in(10,30);
 SELECT empno, ename, emp.deptno,dname
 FROM emp JOIN dept ON emp.deptno=dept.deptno and emp.deptno IN(10,30);
 
-
+SELECT empno, ename, deptno,dname
+FROM emp JOIN dept USING(deptno)
+WHERE deptno = 10 OR deptno =30;
 
 --JOIN0_2
 SELECT empno , ename, sal, deptno, dname
 FROM emp natural join dept
+WHERE sal > 2500
+ORDER BY deptno;
+
+SELECT empno , ename, sal, dept.deptno, dname
+FROM emp JOIN dept ON emp.deptno = dept.deptno AND sal > 2500
+ORDER BY deptno;
+
+SELECT empno , ename, sal,deptno, dname
+FROM emp JOIN dept USING(deptno)
 WHERE sal > 2500
 ORDER BY deptno;
 
@@ -156,14 +178,34 @@ FROM emp natural join dept
 WHERE sal > 2500 and empno > 7600
 ORDER BY deptno;
 
+SELECT empno , ename, sal, dept.deptno, dname
+FROM emp JOIN dept ON (sal > 2500 and empno > 7600 and emp.deptno = dept.deptno)
+ORDER BY deptno;
+
+SELECT empno , ename, sal, deptno, dname
+FROM emp JOIN dept USING(deptno)
+WHERE sal > 2500 and empno > 7600
+ORDER BY deptno;
+
 --JOIN0_4
 SELECT empno , ename, sal, deptno, dname
 FROM emp natural join dept
 WHERE sal > 2500 and empno > 7600 and dname = 'RESEARCH'
 ORDER BY deptno;
 
+SELECT empno , ename, sal, dept.deptno, dname
+FROM emp JOIN dept ON(sal > 2500 and empno > 7600 )
+WHERE dname = 'RESEARCH' and emp.deptno = dept.deptno
+ORDER BY deptno;
+
+SELECT empno , ename, sal, deptno, dname
+FROM emp JOIN dept USING(deptno)
+WHERE dname = 'RESEARCH' and sal > 2500 and empno > 7600
+ORDER BY deptno;
+
 --join1
 SELECT lprod_gu, lprod_nm, prod_id, prod_name
-FROM prod natural join lprod
-WHERE lprod_gu = prod_lgu;
+FROM prod JOIN lprod ON(lprod_gu = prod_lgu);
+
+
 
