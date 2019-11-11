@@ -51,15 +51,15 @@ FROM emp a, emp b
 WHERE a.mgr = b.empno; 
 
 
---ANSI LEFT OUTER
-SELECT a.empno, a.ename, a.mgr, a.ename
+--ANSI LEFT OUTER????
+SELECT a.empno, a.ename, a.mgr, a.ename--????
 FROM emp a LEFT OUTER JOIN emp b ON (a.mgr = b.empno);
 
 -- 아래 두개의 쿼리는 on절에 기술되면 조인 조건, where절은 join이 끝난후 제거조건이므로 결과가 다르다.
-SELECT a.empno, a.ename, a.mgr, b.ename
+SELECT a.empno, a.ename, a.mgr, b.ename, b.deptno
 FROM emp a LEFT OUTER JOIN emp b ON (a.mgr = b.empno AND b.deptno = 10);
 
-SELECT a.empno, a.ename, a.mgr, b.ename
+SELECT a.empno, a.ename, a.mgr, b.ename,b.deptno
 FROM emp a LEFT OUTER JOIN emp b ON (a.mgr = b.empno )
 WHERE b.deptno = 10;
 
@@ -142,7 +142,7 @@ ORDER BY a.pid desc , a.day desc;
 --쌤
 SELECT  a.pid, a.pnm, a.cid, c.cnm, a.day, a.cnt
 FROM
-(SELECT B.PID, b.pnm, 1 cid, nvl(a.day,0) day, nvl(a.cnt, 0) cnt
+(SELECT b.pid, b.pnm, 1 cid, nvl(a.day,0) day, nvl(a.cnt, 0) cnt
 FROM cycle a, product b
 where a.pid(+) = b.pid
 and a.cid(+) =1) a, customer c
@@ -191,10 +191,3 @@ SELECT *
 FROM emp
 WHERE sal > (SELECT AVG(sal) FROM emp);
 
---sub3
-SELECT *
-FROM emp
-WHERE deptno IN ((SELECT deptno
-                FROM emp
-                WHERE ename IN ('SMITH','WARD')))
-ORDER BY empno desc;
