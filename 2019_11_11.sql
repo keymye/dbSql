@@ -38,13 +38,13 @@ WHERE sal > all (SELECT sal --800,1250
 --mgr 컬럼에 값이 나오는 직원
 SELECT distinct mgr FROM emp ORDER BY mgr;
 
---어떤 직원의 관리자 역할을 하는 직원정보 조회
+--평사원 조회
 --단 NOT IN 연산자 사용시 SET에 NULL이 포함될 경우 정상적으로 동작하지 않는다.
 --NULL처리 함수나 WHERE절을 통해 NULL값을 처리한 이후 사용
 SELECT *
 FROM emp
 WHERE empno NOT IN (SELECT mgr FROM emp WHERE mgr IS NOT NULL); --서브쿼리 결과에 null이 존재할 경우 값이 안나오는게 정상
-                                
+    
 SELECT *
 FROM emp
 WHERE empno NOT IN (SELECT NVL(mgr,-9999) FROM emp);    
@@ -59,7 +59,7 @@ SELECT mgr, deptno FROM emp WHERE empno IN(7499,7782);
 
 SELECT *
 FROM emp
-WHERE (mgr, deptno) IN (SELECT mgr, deptno FROM emp WHERE empno IN(7499,7782));                
+WHERE (mgr, deptno) IN (SELECT mgr, deptno FROM emp WHERE empno IN(7499,7782));     
                 
 SELECT *
 FROM emp
@@ -85,28 +85,21 @@ SELECT distinct pid, pnm
 FROM product 
 WHERE pid NOT IN (SELECT pid FROM cycle WHERE cid=1);
 
+
 --sub6
 SELECT  *
 FROM cycle
 WHERE cid = 1 and pid in
 (SELECT pid FROM cycle WHERE cid=2);
-    
---sub7
-SELECT a.cid, cnm, a.pid, pnm,a.day, a.cnt
-FROM customer JOIN
-(SELECT  *
-FROM cycle
-WHERE cid = 1 and pid in
-(SELECT pid FROM cycle WHERE cid=2)) a ON (a.cid=customer.cid) 
-JOIN product ON (a.pid=product.pid); 
 
+
+--sub7
 SELECT cycle.cid, customer.cnm,product.pid,product.PNM,day,cnt
 FROM customer,cycle,product
 WHERE cycle.cid = 1 and customer.cid = cycle.cid and cycle.pid = product.pid 
 and product.pid in(SELECT pid 
                     FROM cycle 
                     WHERE cid=2);
-                    
                
 --EXISTS MAIN쿼리의 컬럼을 사용해서 SUBQUERY에 만족하는 조건이 있는지 체크
 --만족하는 값이 하나라도 존재하면 더이상 진행하지 않고 멈추기 때문에 성능면에서 유리
@@ -141,6 +134,11 @@ FROM dept
 WHERE deptno in (SELECT deptno FROM emp);    
 
 --sub9
+SELECT pid,pnm
+FROM product
+WHERE NOT EXISTS(SELECT 'x'
+            FROM cycle 
+            WHERE cid=1 AND product.pid = cycle.PID);
 
 --집합연산
 --사번이 7566 or 7698인 사원 조회(사번이랑 이름)

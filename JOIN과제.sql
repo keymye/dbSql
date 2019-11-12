@@ -23,15 +23,16 @@ SELECT employee_id, concat(first_name, last_name)name, e.job_id, job_title
 FROM jobs j JOIN employees e ON(j.job_id = e.job_id);
 
 --JOIN13
+SELECT e.manager_id mng_id, concat(m.first_name,m.last_name) mgr_name, e.employee_id,  concat(e.first_name,e.last_name) name,
+e.job_id, job_title
+FROM employees e, employees m, jobs
+WHERE m.employee_id = e.manager_id AND jobs.job_id = e.job_id;
+--매니저아이디,이름
 
 
-
-
-
-
-
-
-
+select * from jobs;
+select * from employees order by manager_id;
+select * from employees order by employee_id;
 
 
 
