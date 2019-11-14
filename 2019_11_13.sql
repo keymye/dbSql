@@ -291,6 +291,7 @@ ALTER TABLE dept ADD CONSTRAINT pk_dept PRIMARY KEY (deptno);
 ALTER TABLE dept DROP CONSTRAINT pk_dept;
 --2.emp 테이블의 empno컬럼로 PRIMARY KEY제약을 테이블 변경
 --ddl을 통해 생성
+
 ALTER TABLE emp ADD CONSTRAINT pk_emp PRIMARY KEY (empno);
 ALTER TABLE dept DROP CONSTRAINT pk_emp;
 --3.emp 테이블의 deptno컬럼으로 dept 테이블의 deptno컬럼을
