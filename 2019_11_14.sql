@@ -60,6 +60,9 @@ FROM user_tab_comments a, user_col_comments b
 WHERE a.table_name = b.table_name AND a.table_name IN ('CUSTOMER','PRODUCT','CYCLE','DAILY') --대문자!
 ORDER BY a.table_name;
 
+SELECT * FROM user_tab_comments;
+SELECT * FROM user_col_comments;
+
 --VIEW생성(emp테이블에서 sal,comm두개 컬럼을 제외한다.)
 CREATE OR REPLACE VIEW v_emp AS
 SELECT empno,ename,job,mgr,hiredate,deptno
@@ -93,14 +96,14 @@ FROM v_emp_dept;
 
 --dept 테이블의 sales-->market sales
 UPDATE dept SET dname = 'MARKET SALES' WHERE deptno =30;
---ROLLBACK;
+ROLLBACK;
 
 --HR계정에게 v_emp_dept view 조회권한을 준다.
 GRANT SELECT ON v_emp_dept TO hr;
 
 --SEQUENCE생성(게시글 번호 부여용 시퀀스)
 CREATE SEQUENCE seq_post 
-INCREMENT BY 1
+INCREMENT BY 1 --증가수
 START WITH 1;
 
 --예) nextval : 게시글
@@ -134,7 +137,8 @@ create table emp_test(
 );
 
 --INSERT INTO emp_test VALUES (중복되지않는값,'brown');
-CREATE SEQUENCE seq_emp_test; --시퀀스와 테이블은 전혀 상관이없다. 독립된 객체 (dual에서 nextval 검색 후 emp_test에서 검색하면 이어서 계속 숫자가 증가
+CREATE SEQUENCE seq_emp_test; --시퀀스와 테이블은 전혀 상관이없다. 
+--독립된 객체 (dual에서 nextval 검색 후 emp_test에서 검색하면 이어서 계속 숫자가 증가
 INSERT INTO emp_test VALUES (seq_emp_test.nextval,'brown');
 select * from emp_test; --empno가 저절로 중복되지 않는값으로 저장된다. 순차적으로 증가
 select seq_emp_test.nextval from dual;
