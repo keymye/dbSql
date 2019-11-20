@@ -17,7 +17,7 @@ ORDER BY point desc;
 
 
 --시도, 시군구, 버거지수, 시도, 시군구, 연말정산 납입액
---서울시 중구 5.7 경기도 수원시 18623591 높은지수끼리 나오게
+--서울시 중구 5.7 ,경기도 수원시 18623591 높은지수끼리 나오게
 
 SELECT a.*, b.*
 FROM
@@ -46,6 +46,7 @@ FROM
     FROM tax
     ORDER BY sal desc) b) b
 ON (a.rn(+) = b.rn);
+
 
 
 ----------------------------------------------------------------
@@ -101,6 +102,8 @@ SELECT 2 empno, 'sally' ename FROM dual;
 
 SELECT * FROM emp_test;
 SELECT * FROM emp_test2;
+
+
 
 
 --insert first
