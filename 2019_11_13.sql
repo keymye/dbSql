@@ -109,7 +109,7 @@ DELETE dept_test
 WHERE deptno = 1;
 
 --FK 제약 옵션
---defualt : 데이터 입력 / 삭제시 순차적으로 처리해줘야 fk 제약을 위해배하지않음
+--default : 데이터 입력 / 삭제시 순차적으로 처리해줘야 fk 제약을 위배하지않음
 --ON DELETE CASCADE : 부모 데이터 삭제시 참조하는 자식 테이블 같이 삭제
 --ON DELETE SET NULL : 부모 데이터 삭제시 참조하는 자식 테이블 값 NULL 설정
 DROP TABLE emp_test;
@@ -190,7 +190,7 @@ INSERT INTO emp_test VALUES (9999, 'brown', '01');
 --emp_gb 컬럼 체크제약에 의해 01, 02가 아닌 값은 입력될 수 없다.
 INSERT INTO emp_test VALUES (9998, 'sally', '03');
 
---SELECT 결과를 이용한 TAVLE 생성
+--SELECT 결과를 이용한 TABLE 생성
 --CREATE TABLE 테이블 명 AS
 --SLEcT 쿼리
 --CTAS
@@ -259,7 +259,7 @@ INSERT INTO emp_test VALUES(9999, 1000,10);
 ALTER TABLE emp_test MODIFY ( ename VARCHAR2(5) );
 desc emp_test;
 
---DEFAURT 설정
+--DEFAULT 설정
 desc emp_test;
 ALTER TABLE emp_test MODIFY ( deptno DEFAULT 10);
 
