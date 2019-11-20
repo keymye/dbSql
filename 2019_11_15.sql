@@ -51,6 +51,7 @@ Predicate Information (identified by operation id):
  
    1 - filter("JOB"='MANAGER')
    
+   
 --인덱스 구성 컬럼만으로 SELECT절에 기술한 경우
 --테이블 접근이 필요없다.
 EXPLAIN PLAN FOR
