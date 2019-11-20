@@ -47,6 +47,7 @@ WHERE OWNER IN ('PC15','HR');
 SELECT *
 FROM emp
 WHERE empno = 7369;
+--pc15에서 조회가능
 
 
 --오라클에서 동일한 SQL이란?
@@ -61,4 +62,5 @@ Select /*bind_test */ *  FROM emp; --결과가 같으나 서로 다른 sql로 인식
 Select /*bind_test */ * FROM emp WHERE empno = 7369;
 Select /*bind_test */ * FROM emp WHERE empno = 7499;
 Select /*bind_test */ * FROM emp WHERE empno = 7521; --실행계획이 각각 나옴
-Select /*bind_test */ * FROM emp WHERE empno = :empno; --바인드변수 사용한 sql은 실행계획이 하나만 나옴 , 실제 값이 뭔지 몰라도 동일한 형태
+Select /*bind_test */ * FROM emp WHERE empno = :empno; 
+--바인드변수 사용한 sql은 실행계획이 하나만 나옴 , 실제 값이 뭔지 몰라도 동일한 형태
