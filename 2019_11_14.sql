@@ -143,7 +143,6 @@ INSERT INTO emp_test VALUES (seq_emp_test.nextval,'brown');
 select * from emp_test; --empno가 저절로 중복되지 않는값으로 저장된다. 순차적으로 증가
 select seq_emp_test.nextval from dual;
 
-
 --index
 --rowid : 테이블 행의 물리적 주소, 해당 주소를 알면 테이블에 빠르게 접근이 가능하다.
 SELECT product.*, ROWID
