@@ -146,6 +146,7 @@ WHERE sal <
     FROM emp_test b
     WHERE b.deptno = a.deptno);
 
+commit;
 --emp,emp_test empno컬럼으로 같은 값끼리 조회
 --1.emp.empno, emp.ename, emp.sal, emp_test.sal
 SELECT emp.empno , emp.ename, emp.sal, emp_test.sal
@@ -159,15 +160,20 @@ FROM
 FROM emp, emp_test
 WHERE emp.empno = emp_test.empno) a
 JOIN 
-(SELECT deptno , round(avg(sal),0) avg
+(SELECT deptno , round(avg(sal),2) avg
 FROM emp
 group by deptno) b
 ON(a.deptno  = b.deptno);
 
 
 
+select emp.empno, emp.ename, emp.sal, emp_test.sal , emp.deptno, a.sal_avg
+from
+emp,emp_test,
+(select deptno, round(avg(sal),2)sal_avg
+from emp
+group by deptno) a
+where emp.empno = emp_test.empno
+and emp.deptno = a.deptno;
 
 
-
-
-select * from emp_test;
