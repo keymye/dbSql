@@ -144,7 +144,7 @@ dname_p IN dept_test.dname%TYPE, loc_p IN dept_test.loc%TYPE)
 IS
 BEGIN 
     INSERT INTO dept_test VALUES(deptno_p,dname_p, loc_p);
-    
+    COMMIT;
     dbms_output.put_line(deptno_p || ',' || dname_p || ',' || loc_p);
 END;
 /
@@ -152,7 +152,8 @@ exec registdept_test(99,'ddit','daejeon');
 
 
 select * from dept_test;
+commit;
 desc dept_test;
-
+delete from dept_test where dname='ddit';
 
 

@@ -24,7 +24,7 @@ WHERE d_avgsal> (SELECT ROUND(avg(sal),2) FROM emp);
 --달력 만들기
 --STEP1. 해당 년월의 일자 만들기
 --CONNECT BY LEVEL
---iw : 목요일기준?
+--iw : 목요일기준
 
 --연습
 select TO_DATE(201911, 'YYYYMM') + (level-1) 날짜, TO_CHAR(TO_DATE(201911, 'YYYYMM') + (level-1),'day') 요일,
@@ -99,7 +99,7 @@ START WITH deptcd = 'dept0'--START WITH p_deptcd IS NULL
 CONNECT BY PRIOR deptcd = p_deptcd; --prior 현재 읽은 데이터(xx회사) ,부, 팀 , 파트 등등 순서대로 바뀜
 
 --실습h_2
-SELECT LEVEL, deptcd, LPAD(' ',(LEVEL-1)*4,' ') || deptnm as deptnm, P_DEPTCD
+SELECT LEVEL lv, deptcd, LPAD(' ',(LEVEL-1)*4,' ') || deptnm as deptnm, P_DEPTCD
 FROM dept_h
 START WITH deptcd = 'dept0_02'
 CONNECT BY PRIOR deptcd = p_deptcd;

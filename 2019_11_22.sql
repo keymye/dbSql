@@ -43,6 +43,7 @@ WHERE deptnm != '정보기획부'
 START WITH deptcd='dept0'
 CONNECT BY PRIOR deptcd = p_deptcd;
 
+--처음부터 걸러준다.
 SELECT deptcd, LPAD(' ', 4*(level-1),' ') || deptnm deptnm
 FROM dept_h
 START WITH deptcd='dept0'

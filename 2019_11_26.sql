@@ -97,6 +97,12 @@ WHERE a.rn>=b.rn
 GROUP BY a.empno, a.ename, a.sal
 ORDER BY a.sal, a.empno;
        
+select empno, ename, deptno,sal ,
+sum(sal) over(order by sal
+rows between unbounded preceding and current row)
+c_sum
+from emp;
+
 
 
 --WINDOWING
